@@ -1,0 +1,60 @@
+doctype html
+html
+	<head>
+	title= title
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	script(src="http://code.jquery.com/jquery-latest.js")
+	script(type="text/javascript").
+		$(document).ready(function() {
+			$("#submit").on("click", submitSubscription);
+		});
+		function submitSubscription(){
+			var soid = $('#soid').val();
+			var streamid = $('#streamid').val();
+			if(!soid || !streamid) {
+				alert('both field Service Object ID and Stream ID must be filled');
+			} else {
+			// send data back to dashboard to send the subscription to COMPOSE
+			var host = 'api.servioticy.com';				 
+			var uri = '/'+soid+'/streams/'+streamid+'/subscriptions';
+			// optional HTTP or HTTPS connection
+			var protocols = 'http://';
+			var _url = protocols+host+uri;
+			$.ajax({
+				type: "POST",
+				url: _url,
+				contentType: 'application/json',
+				headers: { 
+					Authorization: '#{apikey}'
+				},
+				data: JSON.stringify( !{_subscriptions} ),
+				dataType: 'json'
+			})
+				// callback option on success, receives the returned data
+				// a string containing the statusCode and the jqXHR-Object
+				.success(function(composeRes) {
+					composeRes = JSON.stringify(composeRes);
+					$("#response").text( composeRes );
+				})
+				.error(function(msg){
+					$("#response").text("error: "+ JSON.stringify(msg));
+				});	
+			}
+		}
+	</head>
+
+	body
+		h1= title
+		p Welcome to #{title}
+		br
+		label(for="soid") Service Object ID: 
+		input(id="soid",type="text",value="",placeholder="service object id")
+		br
+		label(for="streamid") Stream ID: 
+		input(id="streamid",type="text",value="location",placeholder="Stream id")
+		button(id="submit") senden
+		br
+		h2 Response from COMPOSE is:
+		p#response 
+		br
+		a(href='/') Back to Index Page

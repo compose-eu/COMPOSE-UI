@@ -1,0 +1,18 @@
+{
+  "callback": "http",
+  "url": "http://testbed.compose-project.eu:8080/update/@latitude@/@longitude@",
+  "aliases":
+  [
+    {
+      "##": "{$.channels[?(@.name=='",
+      "!!": "')][0].current-value}" 
+    },
+    {
+      "@latitude@": "##latitude!!"
+    },
+    {
+      "@longitude@": "##longitude!!"
+    }
+  ],
+  "method": "GET"
+}

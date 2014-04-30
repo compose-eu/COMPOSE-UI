@@ -1,0 +1,37 @@
+<div class="main">
+  <h2 class="headerBold">Device Orientation</h2>
+  <table>
+    <tr>
+      <td class="headerBold td-mobile-width">Event</td>
+      <td>{{doEvent}}</td>
+    </tr>
+    <tr>
+      <td class="headerBold td-mobile-width">Supported</td>
+      <td>{{isSupported}}</td>
+    </tr>
+<!--     <tr>
+      <td>Acceleration</td>
+      <td >X: {{doAccel.x }}, Y: {{doAccel.y }}, Z: {{doAccel.z }}</td>
+    </tr>-->
+    <tr ng-if="streamName === 'orientation'"> 
+      <td class="headerBold td-mobile-width">Gyroscope</td>
+      <td class="apiToken">X: {{doAccelGrav.x }} <br/> Y: {{doAccelGrav.y }}<br/> Z: {{doAccelGrav.z }}</td>
+    </tr>
+    <tr ng-if="streamName === 'location'"> 
+      <td class="headerBold td-mobile-width">Geo-Location<br></td>
+      <td class="apiToken ">Latitude: {{doGeo.lat }}<br></td>
+      <tr ng-if="streamName === 'location'">
+        <td class="headerBold td-mobile-width"></td>
+        <td class="apiToken">Longitude: {{doGeo.long }}<br></td>
+      </tr>
+    </tr>    
+<!--     <tr>
+      <td>rotationRate</td>
+      <td >Alpha: {{doRotRate.x }}, Beta: {{doRotRate.y }}, Gamma: {{doRotRate.z }}</td>
+    </tr>
+    <tr>
+      <td>interval</td>
+      <td >{{doInterval}}</td>
+    </tr>		 -->    
+   </table>
+</div>

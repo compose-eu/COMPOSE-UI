@@ -1,0 +1,259 @@
+@font-face {
+  font-family: 'Maven Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Maven Pro Regular'), local('MavenProRegular'), url(http://themes.googleusercontent.com/static/fonts/mavenpro/v5/MG9KbUZFchDs94Tbv9U-pT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, span, ul, li{
+	font-family: "Maven Pro";
+	color: inherit;
+}
+
+html{
+	overflow-x: hidden;
+}
+
+body{
+	background-color: #FFF;
+}
+.navbar-default {
+	background-color: #e81c5b;
+	border-color: transparent;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+	color: #ffffff;
+	background-color: transparent;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+	border-color: none;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color: #00517a;
+	background-color: transparent;
+}
+
+.showAlert{
+	display: none;
+}
+
+.alert-success {
+	background-color: #3E92BD;
+	border-color: #3E92BD;
+	color: #ffffff;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	background-color: #00517A;
+	color: #ffffff;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+	text-decoration: none;
+	color: #ffffff;
+	background-color: #00517A;
+}
+
+.page-header {
+	padding-bottom: 9.5px;
+	margin: 42px 0 21px;
+	border-bottom: none;
+}
+
+.panel-primary > .panel-heading {
+	color: #ffffff;
+	background-color: #3E92BD;
+	border-color: #2c3e50;
+}
+
+.headerIcon{
+	width: 50px;
+	height: auto;
+}
+
+.deviceIcon{
+	width: 50px;
+	height: auto;
+	margin: 30px 0 0 30px;
+}
+
+.iconText{
+	color: #38badd;
+	margin-top: 43px;
+	margin-left: 20px;
+}
+
+.headerBold{
+	font-weight: bold;
+}
+
+.apiToken{
+	word-wrap:break-word;
+}
+
+.left{
+	float:left;
+}
+.right{
+	float: right;
+}
+
+.hide{
+	display:none;
+}
+
+.show{
+	display:block;
+}
+
+.resetRowMargin{
+	margin: 0;
+}
+.darkGrey{
+	color: #4d4d4d !important;
+}
+
+.darkBlue{
+	color:#38badd !important;
+}
+
+.thumbnail{
+	background-color: #f4f4f4 !important;
+	border: none;
+	border-radius: 0px;	
+}
+
+.thumbnail.white{
+	background-color: #ffffff !important;
+	border: 2px solid #cccccc;
+	border-radius: 0px;	
+}
+
+.text-center > span{
+	color: #38badd;
+}
+
+
+
+a:hover, a:focus {
+	color: #38badd;
+	text-decoration: none;
+}
+
+h3.panel-title  .right{
+	cursor: pointer;
+}
+
+.navbar-brand-image{
+	width: auto;
+	height:80px;
+}
+.navbar-connect{
+	background-color: #fff;
+	margin-bottom: 0px;
+}
+
+.navbar-connect-info{
+	background-color: #88d6eb !important;
+	margin-bottom: 0px;
+	color: #4d4d4d;
+	min-height: 80px;
+}
+.navbar-default-desc{
+	margin-bottom: 0px;
+}
+
+.navbar-brand-icon{
+	padding: 10px 0px 10px 11px;
+	min-height: 80px;
+}
+
+.navbar-brand-icon-small{
+	width: 40px;
+	height: 40px;
+}
+
+.td-mobile-width{
+	width: 100px;
+	height: 20px;
+}
+
+.small-icon-left{
+	max-width: 200px;
+	word-wrap: break-word;
+	float: left;
+}
+
+.deviceIconBig{
+	width: 80px;
+	padding-top: 10px;
+	margin-left: 30px;
+}
+.deviceIconBigShow{
+	width: 80px;
+	height: 80px;
+	vertical-align: middle;
+}
+
+.page-header-item-show{
+	min-height: 100px;
+	margin: 10px 0 21px;
+}
+.page-header-border-bottom{
+	border-bottom: 2px solid #4d4d4d;
+	padding-bottom: 20px;
+}
+
+.streamsEntry{
+	margin-top: 20px;
+}
+.streamsEntry .panel{
+	border: 1px solid #f4f4f4;
+	border-radius: 0px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	background-color: #f4f4f4;
+}
+.streamsEntry .panel .panel-heading{
+	background-color: #f4f4f4;
+	border-bottom: none;
+	color: #4d4d4d;
+}
+.streamsEntry .panel .panel-heading h3{
+	color: #38badd;
+	font-size: 26px;
+}
+
+@media (min-width: 768px){
+	.navbar{
+		border-radius: 0px;
+	}
+
+	.thumbnail:hover{
+		border-color: #2c3e50;
+
+	}
+
+	.glyphicon-xlg{
+		font-size: 45px;
+		-webkit-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+
+	.thumbnail:hover .glyphicon-xlg{
+		color: #5B7A9A;
+	}
+
+	.thumbnail{
+		min-height: 120px;
+	}
+
+	.navbar-nav.navbar-right:last-child {
+		margin-right: 0px;
+	}
+
+}

@@ -1,0 +1,12 @@
+{
+    "callback":"http", 
+    "destination":"http://requestb.in/ssxygbst?lat=@latitude@&lon=@longitude@", 
+    "customFields": { 
+        "aliases": [ 
+            { "##": "{$.channels.", "!!": ".current-value}" }, 
+            {"@latitude@": "##latitude!!"}, 
+            {"@longitude@": "##longitude!!"} 
+        ], 
+        "method":"GET" 
+    } 
+}

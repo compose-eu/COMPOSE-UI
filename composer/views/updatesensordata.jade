@@ -1,0 +1,224 @@
+doctype html
+html
+	<head>
+	title= title
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	script(src="http://code.jquery.com/jquery-latest.js")
+	script(type="text/javascript").
+		var showGeoLocationElement;
+		$(document).ready(function() {
+			showGeoLocationElement = $("#showGeoLoc");
+			$("#submit").on("click", getLocation);
+		});
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(updateJSONFile);
+				
+			}
+			else {
+				showGeoLocationElement.text=("Geolocation is not supported by this browser.");
+			}							
+		}
+		function updateJSONFile(position) {
+			// update the html-field on webpage with actual geo location data
+			showGeoLocationElement.text("Latitude: " + position.coords.latitude +
+				" Longitude: " + position.coords.longitude);
+			// storeData is a placeholder for the corresponding transfered
+			// object from res.render in updatesensordata.js .
+			// ! is for "unescapted buffered code" to get a JSON-Object transfered.
+			// see: jade-lang.com/reference
+			var _data = !{_storeData};
+			// get actual time in unix format
+			var timestamp = Date.now();
+			// the attriute current-value must be in squared brackets 
+			// and in quotes to access.
+			_data.channels.longitude['current-value'] = position.coords.longitude;
+			_data.channels.latitude['current-value'] = position.coords.latitude;
+			_data.lastUpdate = timestamp;
+
+			alert(JSON.stringify(_data));
+			
+			//sendCORSRequest(_data);
+			sendUpdate(_data);
+		}
+		// reads the inserted service object id, generates the url for the
+		// put request. the put request is a jquery ajax request and needs
+		// cors support for the preflight request to enable x-domain-requests 
+		function sendUpdate(_data) {
+			var soid = $("#soid").val();
+			var streamid = $("#streamid").val();
+			var longitude = _data.channels.longitude['current-value'];
+			var latitude = _data.channels.latitude['current-value'];
+			var host = 'api.servioticy.com';				 
+			var uri = '/' +soid+ '/streams/' +streamid;
+			// optional HTTP or HTTPS connection
+			var protocols = 'http://';
+			var _url = protocols+host+uri;			
+			// NO SIMPLE (PUT) JQuery CROSS-DOMAIN-REQUEST
+			// This is the minimal konfiguration for a CORS - Request with JQuery
+			$.ajax({
+				type: "PUT",
+				url: _url,
+				contentType: 'application/json',
+				headers: { 
+					Authorization: '#{apikey}'
+				},
+				data: JSON.stringify( _data ),
+				dataType: 'json'
+			})
+				// callback option on success, receives the returned data
+				// a string containing the statusCode and the jqXHR-Object
+				.success(function(composeRes) {
+					composeRes = JSON.stringify(composeRes);
+					$("#response").text( composeRes );
+				})
+				.error(function(msg){
+					alert("error: "+msg);
+				});			
+		}
+
+		/*********************************************************************************************
+		-------------------------- Gyroscope Sensor Updates ------------------------------------------
+		*********************************************************************************************/
+
+		/*
+		init();
+		var count = 0;
+		function init() {			
+			if (window.DeviceOrientationEvent) {
+				alert("DeviceOrientation is supported");
+				document.getElementById("doEvent").innerHTML = "DeviceOrientation";
+				// Listen for the deviceorientation event and handle the raw data
+				window.addEventListener('deviceorientation', function(eventData) {
+					// gamma is the left-to-right tilt in degrees, where right is positive
+					var tiltLR = eventData.gamma;
+
+					// beta is the front-to-back tilt in degrees, where front is positive
+					var tiltFB = eventData.beta;
+
+					// alpha is the compass direction the device is facing in degrees
+					var dir = eventData.alpha
+
+					// call our orientation event handler
+					deviceOrientationHandler(tiltLR, tiltFB, dir);
+				}, false);
+			} else {
+				document.getElementById("doEvent").innerHTML = "Not supported."
+			}
+		}
+
+		function deviceOrientationHandler(tiltLR, tiltFB, dir) {
+			document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
+			document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
+			document.getElementById("doDirection").innerHTML = Math.round(dir);
+
+			// Apply the transform to the image
+			var logo = document.getElementById("imgLogo");
+			logo.style.webkitTransform ="rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+			logo.style.MozTransform = "rotate("+ tiltLR +"deg)";
+			logo.style.transform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+		}
+		*/
+
+
+		/* ----------------------- OUTCOMMENTED CORS METHODS -----------------------------------------
+
+		// -------------------------------------------------------------------
+		// In order to let the device send the sensor update data directly
+		// to COMPOSE, we need to implement cors support to make the sensor
+		// updates via a cross domain put request avaible
+		// FOLLOWING CODE ENABLES CORS SUPPORT FOR THE X-DOMAIN-REQUEST TO COMPOSE
+		function createCORSRequest(method, url) {
+			var xhr = new XMLHttpRequest();
+			if("withCredentials" in xhr) {
+				// XHR for chrome/Firefox/Opera/Safari
+				xhr.open(method,url,true);
+			} else if (typeof XDomainRequest != "undefined") {
+				// XDomeinRequest for IE
+				xhr = new XDomeinRequest();
+				xhr.open(method, url);
+			} else {
+				// CORS not supported
+				xhr = null;
+			}
+			return xhr;
+		}
+		
+		// sends the CORS preflight request
+		function sendCORSRequest(_data){
+			var _url = "http://localhost:3000/updatesensordata";
+			makeCORESRequest();
+			sendUpdate(_data);
+
+			
+			//	CORS in XMLHttpRequest Variante (Javascript)
+			//	--------------------------------------------
+			
+
+			// Helper method to parse the title tag from the response
+			function getTitle(text){
+				return text.match('<title>(.*)?</title>')[1];
+			}
+
+			// Make the actual CORS request
+			function makeCORESRequest() {
+				var xhr = createCORSRequest('PUT', _url);
+				if(!xhr) {
+					alert('CORS not supported');
+					return;
+				}
+
+				// Response handlers.
+				xhr.onload = function() {
+					var text = xhr.responseText;
+					var title = getTitle(text);
+					alert('Response from CORS request to ' + _url + ': ' + title);
+				};
+
+				xhr.onerror = function() {
+					alert('Woops, there was an error making the request');
+				};
+
+				xhr.send();
+			}
+
+
+			// 	CORS in JQuery Variante
+			//	--------------------------------------------
+			$.ajax({
+				type: 'OPTIONS',
+				url: _url,
+				contentType: 'application/json',
+				xhrFIelds: {
+					withCredentials: false
+				},
+				headers: {},
+				success: function(){
+					sendUpdate(_data);
+				},
+				error: function(){
+					alert('fehler');
+				}
+			});			
+		}
+		----------------------------- OUTCOMMENTED PART ENDS HERE ---------------------------------- */
+		
+
+	</head>
+
+	body
+		h1= title
+		p Welcome to #{title}
+		br
+		label(for="soid") Service Object ID: 
+		input(id="soid",type="text",value="#{_soid}",placeholder="Service Object ID")
+		br
+		label(for="streamid") Stream ID: 
+		input(id="streamid",type="text",value="location",placeholder="Stream id")
+		button(id="submit") senden
+		br
+		p(id="showGeoLoc") Here comes Geo Location Data
+		h2 Response from COMPOSE is:
+		p#response 
+		br
+		a(href='/') Back to Index Page

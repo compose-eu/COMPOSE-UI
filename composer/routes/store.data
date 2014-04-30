@@ -1,0 +1,13 @@
+{
+    "channels": {
+        "latitude": {
+            "current-value": 50.818395,
+            "unit": "degrees"
+        },
+        "longitude": {
+            "current-value": 4.40313,
+            "unit": "degrees"
+        }
+    },
+    "lastUpdate": 1199192940
+}

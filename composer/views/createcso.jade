@@ -1,0 +1,67 @@
+doctype html
+html
+	<head>
+	title= title
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	script(src="http://code.jquery.com/jquery-latest.js")
+	script(type="text/javascript").
+		
+		$(document).ready(function() {
+			$("#submit").on("click", createCompositeServiceObjectRequest);
+		});
+		function createCompositeServiceObjectRequest(){
+			// set response field
+			$("#response").text("requesting...");
+			var actualDomain = location.href;
+
+			// get data from html input elements in JSON-format
+			var data = buildDataJson();
+
+			$.ajax({
+				type: "GET",
+				url: actualDomain+'create',
+				contentType: 'application/json',
+				data:  data,
+				dataType: 'json'
+			})
+			// callback option on success, receives the returned data
+			// a string containing the statusCode and the jqXHR-Object
+			.success(function(response) {
+				$("#response").text( JSON.stringify( response ));
+			})
+			.error(function(msg){
+				$("#response").text("error during creation process: "+JSON.stringify( msg ));
+			});		
+		}
+		function buildDataJson(){
+			var dataJson = {
+				"name": $("#name").val(),
+				"description": $("#description").val(),
+				"soid1": $("#soid1").val(),
+				"soid2": $("#soid2").val()			
+			};
+			return dataJson;
+		}
+	</head>
+
+	body
+	h1= title
+	p Welcome to #{title}
+	br
+	label(for="name") Name: 
+	input(id="name",type="text",value="",placeholder="Composite Service Object Name",name="name")
+	br
+	label(for="description") Description: 
+	input(id="description",type="text",value="",placeholder="Composite Service Object Description",name="description")
+	br
+	label(for="soid1") Service Objects 1 (must be location): 
+	input(id="soid1",type="text",value="",placeholder="Service Object ID 1",name="soid1")
+	br
+	label(for="soid2") Service Objects 2 (muste be location): 
+	input(id="soid2",type="text",value="",placeholder="Service Object ID 2",name="soid2")
+	br
+	button(id="submit") create my Composite Service Object
+	h2 Response from COMPOSE
+	p#response #{composeRes}
+	br
+	a(href='/') Back to Index Page

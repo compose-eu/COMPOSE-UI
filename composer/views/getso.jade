@@ -1,0 +1,47 @@
+doctype html
+html
+	<head>
+	title= title
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	script(src="http://code.jquery.com/jquery-latest.js")
+	script(type="text/javascript").
+		$(document).ready(function() {
+			$("#submit").on("click", getServiceObjectRequest);
+		});
+		function getServiceObjectRequest(){
+			// set response field
+			$("#response").text("requesting...");
+			// get request relevant user inputs SOID
+			var soid = $('#soid').val();
+			if(!soid) {
+				alert('the field Service Object ID must be filled');
+			} else {
+				var actualDomain = location.href;
+				$.ajax({
+					type: "GET",
+					url: actualDomain + soid,
+				})
+				// callback option on success, receives the returned data
+				// a string containing the statusCode and the jqXHR-Object
+				.success(function(response) {
+					$("#response").text( response );
+				})
+				.error(function(msg){
+					$("#response").text("Error Message: "+ JSON.parse(msg) );
+				});
+			}
+		}
+	</head>
+
+	body
+		h1= title
+		p Welcome to #{title}
+		br
+		label(for="soid") Service Object ID: 
+		input(id="soid",type="text",value="",placeholder="service object id")
+		button(id="submit") send
+		br
+		h2 Response from COMPOSE is:
+		p#response #{text}
+		br
+		a(href='/') Back to Index Page

@@ -1,0 +1,126 @@
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-arrow-left"></span></a>
+    </div>
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12 page-header-border-bottom">
+  	<div class="page-header page-header-item-show">
+      <div class="pull-left">
+        <img src="/img/device_medium.svg" class="deviceIconBigShow"/>
+      </div>
+      <div class="page-title">
+        <h1 class="headerBold">{{smartobject.name}}</h1>
+        <div class="page-description">
+          <p>{{smartobject.description}}</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <h6>Smart Object ID: {{smartobject.id}}</h6>
+        <h6>Smart Object Mode: {{smartobject.public && 'public' || 'private'}} </h6>
+        <h6>Smart Object Status: //</h6>
+        <h6>Smart Object Last Update: {{smartobject.updatedAt | date: 'M/d/yy h:mm:ss a' }}</h6>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <h6 class="apiToken">API Token: {{apitoken}}</h6>
+        <h6>API Endpoint: <a href="http://api.servioticy.com/">http://api.servioticy.com/</a></h6>
+      </div>
+  	</div>
+  </div>
+
+  <!-- <div class="row">
+    	<div class="col-sm-6 col-md-6">
+    		<div class="propertiesText">
+    			<h6>Smart Object ID:{{smartobject.id}}</h6>
+    			<h6>Smart Object UI URL: {{smartobject.URL}}</h6>
+    			<h6>Smart Object Mode: {{smartobject.public && 'public' || 'private'}} </h6>
+    			<h6>Smart Object Status: //</h6>
+    			<h6>Smart Object Last Update: {{smartobject.updatedAt | date: 'M/d/yy h:mm:ss a' }}</h6>
+    		</div>
+    	</div>
+    	<div class="col-sm-6 col-md-6">
+    		<div class="propertiesText">
+    			<h6 class="apiToken">API Token: {{apitoken}}</h6>
+    			<h6>API Endpoint: <a href="http://api.servioticy.com/">http://api.servioticy.com/</a></h6>
+    			<h6>Datastream ID:</h6>
+    			<h6>Datastream URL:</h6>
+    		</div>
+    	</div>
+
+  </div> -->
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+    	<div class="col-sm-6 col-md-6">
+        <div class="streamsEntry" ng-repeat="(name, stream) in smartobject.streams">
+      		<div class="propertiesText">
+      			
+            <div ng-if="name=='location'">
+              <div class="panel panel-primary" ng-repeat="(name, channel) in stream.channels">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <span>{{name}} in {{channel.unit}}<span>
+                  </h3>
+                    <span>Data Stream Description: {{stream.description}}</span><br/>
+                    <span>Last Updated: {{smartobject.updatedAt | date: 'M/d/yy h:mm:ss a' }}</span><br/>
+                    <span type="button" class="right label label-success" ng-click="showRawData(name)">Raw data</span>
+                </div>
+                <div class="panel-body" ng-switch on="name">
+                  <div ng-switch-when="latitude" >
+                    <div google-chart chart="latitude" width="700" height="600" class="gchart" ng-class="{hide: showRaw ==='latitude' || noData}"></div>
+                    <div  ng-repeat="entry in streamData" class="hide" ng-class="{show: showRaw === 'latitude'}">
+                      <p>Value: {{entry.channels.latitude["current-value"]}} , Date: {{entry.lastUpdate | date: 'M/d/yy h:mm:ss a' }}
+                    </div>
+                    <div ng-class="{hide: !noData}"><p>Currently, there is no data available</p></div>
+                    <h6>Last Value: {{streamData[streamData.length-1].channels.latitude["current-value"]}}  </h6>
+                    <h6>Type: {{stream.type}}</h6>                
+                    <h6>Last Updated: {{smartobject.updatedAt | date: 'M/d/yy h:mm:ss a' }}</h6>            
+                  </div>
+                  <div ng-switch-when="longitude" >
+                    <div google-chart chart="longitude" width="700" height="600" class="gchart" ng-class="{hide: showRaw ==='longitude' || noData}"></div>
+                    <div  ng-repeat="entry in streamData" class="hide" ng-class="{show: showRaw === 'longitude'}">
+                      <p>Value: {{entry.channels.longitude["current-value"]}} , Date: {{entry.lastUpdate | date: 'M/d/yy h:mm:ss a' }}
+                    </div>
+                    <div ng-class="{hide: !noData}"><p>Currently, there is no data available</p></div>
+                    <h6>Last Value: {{streamData[streamData.length-1].channels.longitude["current-value"]}}  </h6>
+                    <h6>Type: {{stream.type}}</h6>                
+                    <h6>Last Updated: {{smartobject.updatedAt | date: 'M/d/yy h:mm:ss a' }}</h6>                                      
+                  </div>
+                </div> 
+              </div>
+            </div>
+            <div ng-if="name=='orientation'">
+              <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title apiToken">{{name}}</h3><br/>
+                      <span>Data Stream Description: {{stream.description}}</span><br/>
+                      <span>Last Updated: {{smartobject.updatedAt | date: 'M/d/yy h:mm:ss a' }}</span>
+                    </div>
+                    <div class="panel-body">
+                      <div ng-repeat="tupel in orientation">
+                        <h3 class="showValue">X: {{tupel.x}}</h3>
+                        <h3 class="showValue">Y: {{tupel.y}}</h3>
+                        <h3 class="showValue">Z: {{tupel.z}}</h3>
+                      </div>
+                    </div>
+                  </div>    
+              </div>             
+            </div>
+      	</div>
+        </div>
+      <div class="col-sm-6 col-md-6">
+
+      <div class="streamsEntry">    
+        <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title apiToken">Scan the QR-Code to connect {{smartobject.name}} with the Platform</h3>
+              </div>
+              <div class="panel-body">
+                <div ng-qrcode ng-data="qrData" class="qrcode"></div>
+              </div>
+        </div> 
+      </div>  
+      </div>   
+      </div>       
+    	</div>   
+    </div>
+  </div>

@@ -1,0 +1,32 @@
+{
+     "streams": {
+                  "streams": [
+                                {
+                                  "name":"location",
+                                  "url":"location",
+                                  "channels": [
+                                                {
+                                                  "name":"latitude",
+                                                  "type":"numeric",
+                                                  "unit":"degrees"
+                                                },
+                                                {
+                                                  "name":"longitude",
+                                                  "type":"numeric",
+                                                  "unit":"degrees"
+                                                }
+                                              ],
+                                  "description":"Latitude of the coordinates.",
+                                  "type":"sensor"
+                                }
+                              ],
+                  "customFields": {
+                                    "foo":"foo fighters",
+                                    "risk":"low"
+                                  }
+                },
+     "actions":[],
+     "properties":[],
+     "workers":[],
+     "links":[]
+}

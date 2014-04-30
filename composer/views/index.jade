@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  br
+  p Service Object Operations
+  br
+  a(href='/createso/') Create Service Object
+  br
+  br
+  a(href='/updatesensordata') Update Sensor Data
+  br
+  br
+  a(href='/subscribetoso') Subscriptions to a Service Object Stream
+  br
+  br
+  a(href='/getso/') Show a specific Service Object
+  br
+  br
+  a(href='/getallsos/') Show all Service Objects and convert them to Composer-Nodes
+  br
+  br
+  p Composite Service Object specific Operation
+  br
+  a(href='/createcso/') Create Composite Service Object
+  br
+  br
+  a(href='/subscribetocso/') Subscriptions to a Composite Service Object Stream
+  br
+  br
+  p COMPOSER
+  br
+  a(href='/composer') Open NODE-RED COMPOSER UI

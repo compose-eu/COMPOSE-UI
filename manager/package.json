@@ -1,0 +1,23 @@
+{
+  "name": "mean",
+  "description": "MEAN - A Modern Stack: MongoDB, ExpressJS, AngularJS, NodeJS. (BONUS: Passport User Support).",
+  "version": "0.1.2",
+  "private": true,
+  "author": "Fraunhofer Fokus FAME",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.fokus.fraunhofer.de/lukasz.radziwonowicz/compose.git"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "node-inspector": "~0.7.2",
+    "express": "~3.4.8",
+    "mongoose": "~3.8.6",
+    "request": "2.33.0",
+    "socket.io": "~0.9.16",
+    "querystring": "~0.2.0"
+  }
+}

@@ -1,0 +1,29 @@
+{  
+   "name": "dummy", 
+   "description": "dummy", 
+   "URL": "dummy",
+   "public":"true",
+   "streams": {
+         "orientation": {
+            "channels": {
+                "x": {
+                    "type": "Number",
+                    "unit": "degrees"
+                },
+                "y": {
+                    "type": "Number",
+                    "unit": "degrees"
+                },
+                "z": {
+                    "type": "Number",
+                    "unit": "degrees"
+                }
+            },
+            "description": "Gyroskope Sensor.",
+            "type": "Sensor"
+        }
+    },
+    "customFields": {},
+    "actions": [],
+    "properties": []
+}

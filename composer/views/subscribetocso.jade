@@ -1,0 +1,64 @@
+doctype html
+html
+	<head>
+	title= title
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	script(src="http://code.jquery.com/jquery-latest.js")
+	script(type="text/javascript").
+		
+		$(document).ready(function() {
+			$("#submit").on("click", createCompositeServiceObjectRequest);
+		});
+		function createCompositeServiceObjectRequest(){
+			// set response field
+			$("#response").text("requesting...");
+			var actualDomain = location.href;
+
+			// get data from html input elements in JSON-format
+			var data = buildDataJson();
+
+			$.ajax({
+				type: "GET",
+				url: actualDomain+'subscribe',
+				contentType: 'application/json',
+				data:  data,
+				dataType: 'json'
+			})
+			// callback option on success, receives the returned data
+			// a string containing the statusCode and the jqXHR-Object
+			.success(function(response) {
+				$("#response").text( JSON.stringify( response ));
+			})
+			.error(function(msg){
+				$("#response").text("error during creation process: "+JSON.stringify( msg ));
+			});		
+		}
+		function buildDataJson(){
+			var dataJson = {
+				"csoID": $("#csoID").val(),
+				"destination": $("#destination").val(),
+				"streamID": $("#streamID").val(),			
+			};
+
+			return dataJson;
+		}
+	</head>
+
+	body
+	h1= title
+	p Welcome to #{title}
+	br
+	label(for="csoID") Composite Service Object ID: 
+	input(id="csoID",type="text",value="",placeholder="Composite Service Object ID",name="csoID")
+	br
+	label(for="destination") Destination URL: 
+	input(id="destination",type="text",value="",placeholder="Composite Service Object Subscription Destination",name="destination")
+	br
+	label(for="streamID") Stream ID: 
+	input(id="streamID",type="text",value="",placeholder="Composite Service Object Stream ID",name="streamID")
+	br
+	button(id="submit") create my subscription on Composite Service Object
+	h2 Response from COMPOSE
+	p#response #{composeRes}
+	br
+	a(href='/') Back to Index Page

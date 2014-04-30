@@ -1,0 +1,18 @@
+{
+  "lastUpdate": 194896802,
+  "channels": [
+   {
+    "unit": "degrees",
+    "type": "numeric",
+    "name": "longitude",
+    "current-value": 24.428239
+   },
+   {
+    "unit": "degrees",
+    "type": "numeric",
+    "name": "latitude",
+    "current-value": 1.3428239
+   }
+  ],
+  "customFields": {}
+}

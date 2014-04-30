@@ -1,0 +1,52 @@
+<!--   <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Smart Object Manager</a>
+    </div>
+  </div> -->
+  
+<div class="col-lg-12">
+	<div class="page-header">
+		<h1>{{smartobject.name}} <small>{{smartobject.description}}</small></h1>
+	</div>
+</div>
+<div class="col-lg-12">
+	<div class="page-header">
+	  <h1>{{headerText}} <small>{{subText}}</small></h1>
+	</div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="well">
+        	<div class="alert alert-dismissable alert-success" ng-class="{showAlert: !success}">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>Well done!</strong><span> You successfully created your Smart Object.</span>
+              <p>You are now redirected back</p>
+            </div>
+			<form class="form-horizontal" role="form" ng-submit="createSO()">
+				<div class="form-group">
+					<label for="soName" class="col-sm-2 control-label">Name</label>
+					<div class="col-sm-8">
+					  <input type="text" class="form-control" id="soName" placeholder="Smart Object Name" ng-model="smartObject.soName">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="soDesc" class="col-sm-2 control-label">Description</label>
+					<div class="col-sm-8">
+					  <textarea type="description" class="form-control" rows="3" id="soDesc" placeholder="Smart Object Description" ng-model="smartObject.description"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="soDesc" class="col-sm-2 control-label">Sensor Type</label>
+					<div class="col-sm-8">
+						<ng-createdropdown ng-data="selectedTemplate" ng-model="sensorTemplates"></ng-createdropdown>
+					</div>
+				</div>				
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+					  <input class="btn btn-default" type="submit" value="Create"></input>
+					  <a href="/" class="btn btn-default">Cancel</a>
+					</div>
+				</div>
+			</form>              
+        </div>
+    </div>

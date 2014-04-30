@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="72px" height="72px" viewBox="0 0 72 72" enable-background="new 0 0 72 72" xml:space="preserve">
+<g>
+	
+		<path fill="none" stroke="#38BADD" stroke-width="4.0152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M24,28.5V7.842C24,7.842,24.079,4,29.075,4H40.5"/>
+	
+		<path fill="none" stroke="#38BADD" stroke-width="4.0152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M48,28.5V7.842C48,7.842,47.938,4,43.561,4H33.5"/>
+	<circle fill="#38BADD" cx="24" cy="28.255" r="3.768"/>
+	<circle fill="#38BADD" cx="48" cy="28.255" r="3.768"/>
+	
+		<polyline fill="none" stroke="#38BADD" stroke-width="4.0152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		28.205,18.58 32.097,22.42 35.987,18.58 39.881,22.42 43.771,18.58 	"/>
+	
+		<path fill="none" stroke="#38BADD" stroke-width="4.0152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M51.555,18.58l3.898,3.84l3.898-3.84c0,0,4.434,34.391,5.264,38.041C65.667,61.25,64.045,66,59.021,66H13.367
+		c-5.023,0-6.867-3.416-5.714-9.379c0.711-3.676,4.995-37.916,4.995-37.916l3.887,3.777l3.891-3.871"/>
+</g>
+</svg>

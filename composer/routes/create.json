@@ -1,0 +1,25 @@
+{  
+   "name": "dummy", 
+   "description": "dummy", 
+   "URL": "dummy",
+   "public":"true",
+   "streams": {
+         "location": {
+            "channels": {
+                "latitude": {
+                    "type": "Number",
+                    "unit": "degrees"
+                },
+                "longitude": {
+                    "type": "Number",
+                    "unit": "degrees"
+                }
+            },
+            "description": "Location Sensor",
+            "type": "Sensor"
+        }
+    },
+    "customFields": {},
+    "actions": [],
+    "properties": []
+}

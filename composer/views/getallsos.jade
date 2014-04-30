@@ -1,0 +1,58 @@
+doctype html
+html
+	<head>
+	title= title
+	link(rel='stylesheet', href='/stylesheets/style.css')
+	script(src="http://code.jquery.com/jquery-latest.js")
+	script(type="text/javascript").
+		$(document).ready(function() {
+			$("#submit").on("click", getServiceObjectsRequest);
+			$("#convert").on("click", convertServiceObjects);
+		});
+		function getServiceObjectsRequest(){
+			// set response field
+			$("#response").text("requesting...");
+			var actualDomain = location.href;
+				$.ajax({
+					type: "GET",
+					url: actualDomain+"show",
+				})
+			// callback option on success, receives the returned data
+			// a string containing the statusCode and the jqXHR-Object
+			.success(function(response) {
+				$("#response").text( response );
+			})
+			.error(function(msg){
+				$("#response").text("error by requesting Error Message: "+JSON.stringify(msg));
+			});
+		}
+		function convertServiceObjects(){
+			// set response field
+			$("#response").text("requesting...");
+			var actualDomain = location.href;
+				$.ajax({
+					type: "GET",
+					url: actualDomain+"convert",
+				})
+			// callback option on success, receives the returned data
+			// a string containing the statusCode and the jqXHR-Object
+			.success(function(response) {
+				$("#response").text( response );
+			})
+			.error(function(msg){
+				$("#response").text("error by requesting Error Message: "+JSON.stringify(msg));
+			});
+		}
+	</head>
+
+	body
+		h1= title
+		p Welcome to #{title}
+		br
+		button(id="submit") show all
+		button(id="convert") convert Service Objects to Nodes
+		br
+		h2 Response from COMPOSE is:
+		p#response #{text}
+		br
+		a(href='/') Back to Index Page

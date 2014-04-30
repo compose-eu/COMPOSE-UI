@@ -1,0 +1,48 @@
+<!--   <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Smart Object Manager</a>
+    </div>
+  </div> -->
+  <div class="col-lg-12">
+    <div class="page-header">
+      <span class="left"><img src="/img/no_user_small.svg" class="headerIcon"/></span> <h1 class="headerBold">My Devices</h1>
+    </div>
+  </div>
+
+  <div class="row resetRowMargin">
+      <div class="col-sm-6 col-md-4"  ng-repeat="smartobject in smartobjects">
+        <a href="#/show/{{smartobject.id}}">
+          <div class="thumbnail">
+            <div class="media">
+              <div class="pull-left">
+                <img src="/img/device_medium.svg" class="deviceIconBig"/>
+              </div>
+              <div class="media-body">
+                <h4 class="darkBlue">{{smartobject.name}}</h4>
+                <p class="darkGrey">{{smartobject.description}}</p>
+              </div>
+            </div>
+
+<!--               <div class="properIcons">
+                  <img src="/img/delete_small.svg" class="smallIcon"/>
+                  <img src="/img/edit_small.svg
+                  " class="smallIcon"/>
+              </div> -->
+          </div>
+        </a>
+      </div>
+        <div class="col-sm-6 col-md-4">
+          <a href="#/create/step-1">
+            <div class="thumbnail white">
+              <div class="media">
+                <div class="pull-left">
+                  <img src="/img/add_medium.svg" class="deviceIcon"/>
+                </div>
+                <div class="media-body">
+                  <p class="iconText"><span >add new device</span></p>
+                </div>
+              </div>              
+            </div>
+        </a>
+      </div>    
+  </div>
